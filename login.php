@@ -1,6 +1,8 @@
 <?php
 SESSION_START();
-
+if (isset($_SESSION['nombre'])) {
+  header('Location: index.php');
+}
 if (isset($_SESSION['errores'])) {
  $_SESSION["errores"] = null;
 }
@@ -68,7 +70,7 @@ if (isset($_SESSION['inputsValues'])) {
             </div>
           <div class="wrap">
               <p class="form-title">Sign In</p>
-            <form class="login" method="post" action="controllers/login.controller.php">
+            <form class="login" method="post" action="controllers/login.controller.sql.php">
                 <input type="text" name="email" placeholder="Email" />
                 <input type="password" name="password" placeholder="Password" />
                 <input type="submit" value="Sign In" class="btn btn-success btn-sm" />

@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_SESSION['nombre'])) {
+  header('Location: index.php');
+}
 if (isset($_SESSION['error'])) {
  $_SESSION["error"] = null;
 };
@@ -59,7 +62,7 @@ $password = $_SESSION['inputsValues']['password'] ?? '';
           </a>
         </div>
       <div class="form-style-5">
-      <form action="controllers/registro.controller.php" enctype="multipart/form-data" method="post" novalidate>
+      <form action="controllers/registro.controller.sql.php" enctype="multipart/form-data" method="post" novalidate>
           <fieldset>
               <legend><span class="number">1</span> Register</legend>
 

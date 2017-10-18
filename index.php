@@ -132,7 +132,12 @@ if (isset($_SESSION['inputsValues'])) {
                                 <div class="main_slider_content wow zoomIn" data-wow-duration="1s">
                                     <h1>Beer Love</h1>
                                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi. </p>
-                                    <button href="./login.php" class="btn-lg">Join here</button>
+
+                                    <?php if (!isset($_SESSION['nombre'])) { ?>
+                                        <a href="./login.php" class="btn-lg">Join here</a>
+                                    <?php } ?>
+                                    
+
                                 </div>
                             </div>
                         </div>

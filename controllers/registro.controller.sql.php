@@ -4,7 +4,7 @@ session_start();
 
 include "../db/conn.php";
 
-$first_name = $_POST['nombre'];
+$nombre = $_POST['nombre'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -47,9 +47,11 @@ if ($errores) {
 $imageName = uniqid();
 $nombreCompleto = guardarImagen('avatar', $imageName, '../avatars/');
 
+//Password hash
+$password = password_hash("$password", PASSWORD_DEFAULT);
 
 //Guardar usuario
-$sql = "INSERT INTO user (first_name,last_name, email, password)VALUES ('$first_name', 'hola', '$email', '$password')";
+$sql = "INSERT INTO user (nombre, email, password)VALUES ('$nombre', '$email', '$password')";
 $query = $db->prepare($sql);
 $query->execute();
 
