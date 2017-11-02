@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require '../clases/usuario.php';
 
 include "../db/conn.php";
 
@@ -46,7 +47,7 @@ if ($errores) {
 //Crear Imagen
 $imageName = uniqid();
 $nombreCompleto = guardarImagen('avatar', $imageName, '../avatars/');
-
+/*
 //Password hash
 $password = password_hash("$password", PASSWORD_DEFAULT);
 
@@ -54,6 +55,14 @@ $password = password_hash("$password", PASSWORD_DEFAULT);
 $sql = "INSERT INTO user (nombre, email, password)VALUES ('$nombre', '$email', '$password')";
 $query = $db->prepare($sql);
 $query->execute();
+*/
+
+
+$usuario = new Usuario( $_POST['nombre'],$_POST['email'],$_POST['password']);
+$usuario->save();
+
+
+
 
 
 //Recuperar data
@@ -75,4 +84,3 @@ function guardarImagen($inputName, $imageName, $path)
 }
 
 header('Location: ../login.php');
-

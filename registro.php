@@ -64,9 +64,9 @@ $password = $_SESSION['inputsValues']['password'] ?? '';
         </div>
       <div class="form-style-5">
       <form  enctype="multipart/form-data" method="post" novalidate <?php if ($dbtype == 'sql') {?>
-                action="controllers/login.controller.sql.php">
+                action="controllers/registro.controller.sql.php">
                 <?php }  elseif ($dbtype == 'json') { ?>
-                  action="controllers/login.controller.php">
+                  action="controllers/registro.controller.php">
                 <?php } ?>
           <fieldset>
               <legend><span class="number">1</span> Register</legend>
