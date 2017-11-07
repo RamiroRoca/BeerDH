@@ -1,46 +1,84 @@
 <?php
-class Usuario
-{
-	private $nombre;
-	private $email;
-	private $password;	
-	private $db;
-	private $base = 'unify_db';
-	private $host = 'localhost';
 
+require_once 'DB.php';
+require_once 'Model.php';
+
+class Usuario extends Model {
+    public $id;
+    public $email;
+    public $password;
+    public $nombre;
+
+    public $fillable = ['nombre', 'email', 'password'];
+    public static $table = 'user';
+}
+
+/*require_once 'DB.php';
+
+ class Usuario
+{
+    public $id;
+	public $nombre;
+	public $email;
+	private $password;	
+	
 	public function __construct($nombre, $email, $password)
 	{
 		$this->nombre = $nombre;
 		$this->email = $email;
-		$this->setPassword($password);
+		$this->password = $password;
 
-		$this->db = new PDO("mysql:host={$this->host};dbname={$this->base};charset=utf8mb4;3306", 'root', '');
-		//$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXEPTION);
 	}
+
+    public static function find($id)
+    {
+        $sql = 'SELECT * FROM user WHERE id = :id';
+        $stmt = DB::getConn()->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $usuario = new Usuario('', '', '',0);
+        $usuario->toUser($result);
+        return $usuario;
+    }
+
+    private function toUser($data)
+    {
+        $this->id = $data['id'];
+        $this->nombre = $data['nombre'];
+        $this->email = $data['email'];
+        $this->password = $data['password'];
+    }
+
+    
 
 	public function save()
 	{
-		$sql = "INSERT INTO user (nombre, email, password)VALUES (:nombre, :email, :password)";
-		$stmt = $this->db->prepare($sql);
-		$stmt->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
-		$stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
-		$stmt->bindValue(':password', $this->password, PDO::PARAM_STR);
-		$stmt->execute();
+        $sql = ($this->id)?$this->update():$this->insert();
+        $stmt = DB::getConn()->prepare($sql);
+        $stmt->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $stmt->bindValue(':password', $this->password, PDO::PARAM_STR);
+        $stmt->execute();
 	}
+    private function insert()
+    {
+        return 'INSERT INTO user (nombre, email, password) VALUES (:nombre, :email, :password)';
+    }
 
-    /**
-     * @return mixed
-     */
+    private function update()
+    {
+        return 'UPDATE user SET nombre=:nombre, email=:email, password:password WHERE id = '.$this->id;
+    }
+
+    
     public function getNombre()
     {
         return $this->nombre;
     }
 
-    /**
-     * @param mixed $nombre
-     *
-     * @return self
-     */
+   
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
@@ -49,19 +87,12 @@ class Usuario
     }
 
 
-    /**
-     * @return mixed
-     */
+   
     public function getEmail()
     {
         return $this->email;
     }
 
-    /**
-     * @param mixed $email
-     *
-     * @return self
-     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -70,23 +101,15 @@ class Usuario
     }
 
 
-    /**
-     * @return mixed
-     */
+ 
     public function getPassword()
     {
         return $this->password;
     }
 
-    /**
-     * @param mixed $password
-     *
-     * @return self
-     */
-    public function setPassword($value)
-    {
-        $this->password = password_hash($value, PASSWORD_DEFAULT);
-
-        return $this;
-    }
 }
+*/
+
+
+
+

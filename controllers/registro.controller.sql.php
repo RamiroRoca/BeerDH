@@ -1,9 +1,13 @@
 <?php
 
 session_start();
-require '../clases/usuario.php';
+require_once '../clases/usuario.php';
+require_once '../clases/DBFactory.php';
+require_once '../clases/MySQLDB.php';
 
 include "../db/conn.php";
+
+DBFactory::$db_type = 'MySQLDB';
 
 $nombre = $_POST['nombre'];
 $email = $_POST['email'];
@@ -62,13 +66,15 @@ $usuario = new Usuario( $_POST['nombre'],$_POST['email'],$_POST['password']);
 $usuario->save();
 
 
-
-
+/*
+$usuario->find();
+$actualUser = $usuario->fetchAll(PDO::FETCH_ASSOC);
 
 //Recuperar data
 $query2 = $db->query('SELECT * from user');
 $query2->execute();
 $results = $query2->fetchAll(PDO::FETCH_ASSOC);
+*/
 
 
 function guardarImagen($inputName, $imageName, $path)
